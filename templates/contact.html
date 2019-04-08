@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>联系我们</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/ui_core.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/ui_tabs.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/lightbox.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/twitter.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/gettwitter.js' %}" type="text/javascript"></script>
+	<script type="text/javascript">
+	$(function() {
+		$("#butslide").click(function(){
+				$("#panellogin").slideToggle("fast");
+				$(this).toggleClass("active"); return false;
+		}); 
+		$('#tabsnav').tabs({ fx: { opacity: 'toggle' } });
+		$('a.popup').lightBox({fixedNavigation:true});
+	});
+	</script>
+</head>
+<body>
+<p><a class="skiplink" href="#maincontent">Skip over navigation</a></p>
+<div id="container">
+	<div id="wrapper">
+		<div id="header">
+			<div id="headertop">
+				<a href="{% url 'index' %}" class="replace" id="logo"><span></span></a>
+				<div id="loginarea">
+                {% if request.user.is_authenticated %}
+                    <p class="notlogin">欢迎您！</p>
+                    <p class="loginbut">
+                        <a class="butlogin" href="" >{{ request.user.username }}</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <a class="butlogin" href="{% url 'user:user_logout' %}">退出</a>
+                    </p>
+                {% else %}
+					<p class="notlogin">未登陆！</p>
+					<p class="loginbut">
+                        <a href="{% url 'user:user_login' %}" class="butlogin">登陆</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <a href="{% url 'user:user_register' %}" class="butlogin">注册</a>
+                    </p>
+                {% endif %}
+				</div>
+			</div>
+			<div id="placemainmenu">
+				<ul id="mainmenu">
+					<li><a href="{% url 'index' %}">网站首页</a></li>
+					<li><a href="{% url 'knowledge' %}">雾霾知识</a></li>
+					<li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+					<li><a href="{% url 'data:data_show' %}">数据展示</a></li>
+					<li class="active"><a href="{% url 'contact' %}">联系我们</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div id="content">
+			<div id="maincontent">
+				<div class="boxbig">
+					<h1 class="titlebig">联系我们</h1>
+					<div class="boxbigcontent">
+						<p>留下您的联系方式</p>
+						<form method="post" action="{% url 'contact' %}" id="frmcontact">
+						<div>
+							<label for="txtname">姓名:</label> <input type="text" name="name" class="textboxcontact" id="txtname" /> <span>*</span><br />
+							<label for="txtemail">邮箱:</label> <input type="text" name="email" class="textboxcontact" id="txtemail" /> <span>*</span><br />
+							<label for="txtphone">电话:</label> <input type="text" name="phone" class="textboxcontact" id="txtphone" /><br />
+							<label for="txtmessage">内容:</label> <textarea cols="50" rows="10" name="message" id="txtmessage" class="textareacontact"></textarea><br />
+							<label></label><input type="submit" name="submitcontact" value="发送" class="submitcontact"/>
+						</div>
+						</form>
+					</div>
+					<div class="boxbigcontentbottom"></div>
+				</div>
+			</div>
+			<div id="nav">
+				<div class="boxnav">
+					<h3 class="titlenav">其他联系方式</h3>
+					<div class="boxnavcontent">
+						<ul class="menunav">
+							<li><a href="#">QQ</a></li>
+							<li><a href="#">微信</a></li>
+							<li><a href="#">微博</a></li>
+							<li><a href="#">邮箱</a></li>
+							<li><a href="#">知乎</a></li>
+							<li class="last"><a href="#">GitHub</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer">
+			<p id="texttwitter"></p>
+			<ul id="menufooter">
+				<li><a href="{% url 'index' %}">网站首页</a></li>
+				<li><a href="{% url 'knowledge' %}">雾霾知识</a></li>
+				<li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+				<li><a href="{% url 'data:data_show' %}">数据展示</a></li>
+				<li class="last"><a href="{% url 'contact' %}">联系我们</a></li>
+			</ul>
+			<ul id="menufooterright">
+				<li>Copyright 2019, 张国栋, Inc.</li>
+				<li class="last"><a href="#">回到顶部</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>
