@@ -5,7 +5,6 @@ from datetime import datetime
 
 # Create your models here.
 class UserProfile(AbstractUser):
-    phone = models.CharField(max_length=11, null=True, blank=True, verbose_name='手机号码')
     register_time = models.DateTimeField(default=datetime.now, verbose_name='注册时间')
 
     def __str__(self):

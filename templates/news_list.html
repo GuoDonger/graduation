@@ -3,27 +3,12 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>新闻列表</title>
+	<title>中国雾霾网</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
 	<script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/ui_core.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/ui_tabs.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/lightbox.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/twitter.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/gettwitter.js' %}" type="text/javascript"></script>
-	<script type="text/javascript">
-	$(function() {
-		$("#butslide").click(function(){
-				$("#panellogin").slideToggle("fast");
-				$(this).toggleClass("active"); return false;
-		}); 
-		$('#tabsnav').tabs({ fx: { opacity: 'toggle' } });
-		$('a.popup').lightBox({fixedNavigation:true});
-	});
-	</script>
 </head>
 <body>
-<p><a class="skiplink" href="#maincontent">Skip over navigation</a></p>
 <div id="container">
 	<div id="wrapper">
 		<div id="header">
@@ -50,55 +35,80 @@
 			<div id="placemainmenu">
 				<ul id="mainmenu">
 					<li><a href="{% url 'index' %}">网站首页</a></li>
-					<li><a href="{% url 'knowledge' %}">雾霾知识</a></li>
-					<li class="active"><a href="{% url 'news:news_list' %}">最新新闻</a></li>
-					<li><a href="{% url 'data:data_show' %}">数据展示</a></li>
-					<li><a href="{% url 'contact' %}">联系我们</a></li>
+                    <li><a href="{% url 'harm' %}">雾霾危害</a></li>
+                    <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+                    <li class="active"><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+                    <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+                    <li><a href="{% url 'about' %}">关于我们</a></li>
 				</ul>
+                <form method="post" action="{% url 'news:news_search' %}" id="frmsearch">{% csrf_token %}
+					<div>
+						<input type="text" name="search" class="textboxsearch" value="" placeholder="请输入关键词" onblur="if(this.value.length == 0) this.value='Search';" onclick="if(this.value == 'Search') this.value='';" />
+                        <input type="submit" name="submitsearch" class="submitsearch" value="" />
+					</div>
+				</form>
 				<div class="clear"></div>
 			</div>
 		</div>
 		<div id="content">
+            <ul id="breadcrumb">
+				<li><a href="{% url 'index' %}">首页</a></li>
+				<li class="last">全部新闻</li>
+			</ul>
 			<div id="maincontent">
 				<div class="boxbig">
-					<h1 class="titlebig">Latest News</h1>
+					<h1 class="titlebig">新闻列表</h1>
 					<div class="boxbigcontent">
 						<ul id="listnews">
-                            {% for news in page_list %}
+                            {% for news in current_page %}
                                 <li><h2><a href="{% url 'news:news_detail' news.id %}">{{ news.title }}</a></h2>
 								<ul class="listinfo">
-									<li class="posted">作者<strong>{{ news.author }}</strong>{{ news.add_time }}</li>
+									<li class="posted">来源：<strong>{{ news.author }}&nbsp;&nbsp;</strong>{{ news.add_time }}</li>
                                     <li>{{ news.category.name }}</li>
 									<li class="comment"><a href="{% url 'news:news_detail' news.id %}" class="linkcomment">{{ news.comment_set.count }}</a></li>
 								</ul>
-								<p>{{ news.content | slice:':100' }}</p>
+								<p>{{ news.digest }}</p>
 								<a href="{% url 'news:news_detail' news.id %}" class="linkreadmore">更多</a>
 								<div class="clear"></div>
 							</li>
                             {% endfor %}
 						</ul>
 						<ul id="listpages">
-							{% if page_list.has_previous %}
-                                    <li class="long"><a href="?page={{ page_list.previous_page_number }}">上一页</a></li>
-                                {% else %}
-                                    <li class="long"><a href="?page=1">上一页</a></li>
-                                {% endif %}
+                            {% if current_page.has_previous %}
+                                <li><a href="?page={{ current_page.previous_page_number }}" aria-label="Previous">上一页</a></li>
+                            {% else %}
+                                <li><a href="?page=1" aria-label="Previous">上一页</a></li>
+                            {% endif %}
 
-                                {% for i in page_list.paginator.page_range %}
-                                    <li {% ifequal i page_list.num %}class="active"{% endifequal %}><a class="page" href="?page={{ i }}">{{ i }}</a></li>
-                                {% endfor %}
-
-                                {% if page_list.has_next %}
-                                    <li class="long"><a href="?page={{ page_list.next_page_number }}">下一页</a></li>
+                            {% for foo in page_range %}
+                                {% if current_page_num == foo %}
+                                    <li class="active"><a href="?page={{ foo }}">{{ foo }}</a></li>
                                 {% else %}
-                                    <li class="long"><a href="?page={{ page_list.paginator.num_pages }}">下一页</a></li>
+                                    <li><a href="?page={{ foo }}">{{ foo }}</a></li>
                                 {% endif %}
+                            {% endfor %}
+
+                            {% if current_page.has_next %}
+                                <li><a href="?page={{ current_page.next_page_number }}">下一页</a></li>
+                            {% else %}
+                                <li><a href="?page={{ current_page.paginator.num_pages }}" aria-label="Next">下一页</a></li>
+                            {% endif %}
 						</ul>
 					</div>
 					<div class="boxbigcontentbottom"></div>
 				</div>
 			</div>
 			<div id="nav">
+                <div class="boxnav">
+					<h3 class="titlenav">新闻频道</h3>
+					<div class="boxnavcontent">
+						<ul class="menunav">
+                            {% for category in categories %}
+                                <li><a href="{% url 'news:news_category' category.id %}">{{ category.name }}</a></li>
+                            {% endfor %}
+						</ul>
+					</div>
+				</div>
 				<div class="boxnav">
 					<h3 class="titlenav">新闻网站</h3>
 					<div class="boxnavcontent">
@@ -119,10 +129,11 @@
 			<p id="texttwitter"></p>
 			<ul id="menufooter">
 				<li><a href="{% url 'index' %}">网站首页</a></li>
-				<li><a href="{% url 'knowledge' %}">雾霾知识</a></li>
-				<li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
-				<li><a href="{% url 'data:data_show' %}">数据展示</a></li>
-				<li class="last"><a href="{% url 'contact' %}">联系我们</a></li>
+                <li><a href="{% url 'harm' %}">雾霾危害</a></li>
+                <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+                <li class="active"><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+                <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+                <li><a href="{% url 'about' %}">关于我们</a></li>
 			</ul>
 			<ul id="menufooterright">
 				<li>Copyright 2019, 张国栋, Inc.</li>

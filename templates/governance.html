@@ -1,0 +1,131 @@
+<!DOCTYPE html >
+{% load staticfiles %}
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>中国雾霾网</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
+</head>
+<body>
+<div id="container">
+	<div id="wrapper">
+		<div id="header">
+			<div id="headertop">
+				<a href="{% url 'index' %}" class="replace" id="logo"><span></span></a>
+				<div id="loginarea">
+                {% if request.user.is_authenticated %}
+                    <p class="notlogin">欢迎您！</p>
+                    <p class="loginbut">
+                        <a class="butlogin" href="" >{{ request.user.username }}</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <a class="butlogin" href="{% url 'user:user_logout' %}">退出</a>
+                    </p>
+                {% else %}
+					<p class="notlogin">未登陆！</p>
+					<p class="loginbut">
+                        <a href="{% url 'user:user_login' %}" class="butlogin">登陆</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <a href="{% url 'user:user_register' %}" class="butlogin">注册</a>
+                    </p>
+                {% endif %}
+				</div>
+			</div>
+			<div id="placemainmenu">
+				<ul id="mainmenu">
+					<li><a href="{% url 'index' %}">网站首页</a></li>
+                    <li><a href="{% url 'harm' %}">雾霾危害</a></li>
+                    <li class="active"><a href="{% url 'governance' %}">雾霾治理</a></li>
+                    <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+                    <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+                    <li><a href="{% url 'about' %}">关于我们</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div id="content">
+            <ul id="breadcrumb">
+				<li><a href="{% url 'index' %}">首页</a></li>
+				<li class="last">雾霾治理</li>
+			</ul>
+			<div id="maincontent">
+				<div class="boxbig">
+					<h1 class="titlebig">如何治理雾霾？</h1>
+					<div class="boxbigcontent">
+                        <h2>治理方法</h2>
+                        <p style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;治理雾霾最主要的方法是减少排放。目前各种化石能源的大规模使用是造成雾霾天气的最主要原因。大家想想，发电需要燃烧煤，而实际上被燃烧的煤只有不到30%被转化成了电能，其余的都被排放了。汽车、轮船等机械需要石油，同样的，发动机也只是将不足30%的石油转化成了动力，其余的也都被排放了。也就是说我们使用能源是“大手大脚”的，利用的少，排放的多。减少能源的使用是不现实的，而清洁能源远不能满足需求，且价格昂贵。如果现有能源能利用70%，而排放30%的话，环境问题与能源问题会同时得到解决，人类社会也会得到可持续的发展。</p>
+                        <p style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;还有，就是多植树造林。植树造林对于调节气候、涵养水源、减轻大气污染具有重要意义。因为树木有吸收二氧化碳、放出氧气的作用。而且能抵挡风沙。还可以美化环境。人工造林按不同的经营目的和特点分为用材林、防护林、经济林、薪炭林及特种用途林5种。例如竹柳、夹竹桃、槐树、樟树、红豆杉等。这是需要全民参与，不仅可以美化家园，减轻了水土流失和风沙对农田的危害，而且还有效提高了森林生态系统的储碳能力。</p>
+                        <h2>治霾战略</h2>
+                            <ul class="listok">
+							    <li><p style="font-size: 13px"><strong>大气污染防治行动计划</strong><br/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大气环境保护事关人民群众根本利益，事关经济持续健康发展，事关全面建成小康社会，事关实现中华民族伟大复兴中国梦。当前，我国大气污染形势严峻，以可吸入颗粒物(PM10)、细颗粒物(PM2.5)为特征污染物的区域性大气环境问题日益突出，损害人民群众身体健康，影响社会和谐稳定。随着我国工业化、城镇化的深入推进，能源资源消耗持续增加，大气污染防治压力继续加大。为切实改善空气质量，制定本行动计划。</p>
+							    </li>
+							    <li><p style="font-size: 13px"><strong>总体要求</strong><br/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;以邓小平理论、“三个代表”重要思想、科学发展观为指导，以保障人民群众身体健康为出发点，大力推进生态文明建设，坚持政府调控与市场调节相结合、全面推进与重点突破相配合、区域协作与属地管理相协调、总量减排与质量改善相同步，形成政府统领、企业施治、市场驱动、公众参与的大气污染防治新机制，实施分区域、分阶段治理，推动产业结构优化、科技创新能力增强、经济增长质量提高，实现环境效益、经济效益与社会效益多赢，为建设美丽中国而奋斗。</p>
+							    </li>
+                                <li><p style="font-size: 13px"><strong>奋斗目标</strong><br/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经过五年努力，全国空气质量总体改善，重污染天气较大幅度减少;京津冀、长三角、珠三角等区域空气质量明显好转。力争再用五年或更长时间，逐步消除重污染天气，全国空气质量明显改善。</p>
+							    </li>
+						    </ul>
+                    </div>
+					<div class="boxbigcontentbottom"></div>
+				</div>
+			</div>
+			<div id="nav">
+                <div class="boxnav">
+					<h3 class="titlenav">政府政策</h3>
+					<div class="boxnavcontent">
+						<ul class="menunav">
+                            <li><a href="http://www.pm25.com/news/795.html">中国将增投680亿元改善成品油质量 加大力度治理雾霾</a></li>
+                            <li><a href="http://www.pm25.com/news/790.html">河北省治霾进入精细化模式 PM2.5浓度连续4个月下降</a></li>
+                            <li><a href="http://www.pm25.com/news/780.html">京津冀齐发力雾霾治理 2017年控煤或超过一亿吨</a></li>
+                            <li><a href="http://www.pm25.com/news/774.html">各路“神器”力保鹭岛“小清新” 今年岛内空气质量不赖</a></li>
+                            <li class="last"><a href="http://www.pm25.com/news/77.html">为净化空气质量沪将首推4000辆“环保的士”</a></li>
+                        </ul>
+                        <a href="http://www.pm25.com/news/cat/15" class="linkreadmore">更多新闻</a>
+                        <div class="clear"></div>
+					</div>
+				</div>
+				<div class="boxnav">
+					<h3 class="titlenav">名人名言</h3>
+					<div class="boxnavcontent">
+						<p id="texttestimonial">
+							绿水青山就是金山银山
+						</p>
+                        <p id="texttestimonial">
+							要像保护眼睛一样保护生态环境
+						</p>
+                        <p id="texttestimonial">
+                            良好生态环境是最普惠的民生福祉
+						</p>
+                        <p id="texttestimonial">
+                            生态兴则文明兴，生态衰则文明衰
+						</p>
+                        <p id="texttestimonial">
+                            山水林田湖草是生命共同体
+						</p>
+						<p id="testimonialname"><strong>习近平</strong></p>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer">
+			<p id="texttwitter"></p>
+			<ul id="menufooter">
+				<li><a href="{% url 'index' %}">网站首页</a></li>
+                <li><a href="{% url 'harm' %}">雾霾危害</a></li>
+                <li class="active"><a href="{% url 'governance' %}">雾霾治理</a></li>
+                <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+                <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+                <li><a href="{% url 'about' %}">关于我们</a></li>
+			</ul>
+			<ul id="menufooterright">
+				<li>Copyright 2019, 张国栋, Inc.</li>
+				<li class="last"><a href="#">回到顶部</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

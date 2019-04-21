@@ -15,3 +15,4 @@ class Banner(models.Model):
     class Meta:
         verbose_name = '轮播内容'
         verbose_name_plural = verbose_name
+

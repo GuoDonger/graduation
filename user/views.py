@@ -16,20 +16,21 @@ def user_register(request):
     else:
         user = UserRegisterForm(request.POST)
         if user.is_valid():
+            username = user.cleaned_data['username']
             email = user.cleaned_data['email']
             password = user.cleaned_data['password']
-            u = UserProfile.objects.filter(Q(username=email) | Q(email=email))
+            u = UserProfile.objects.filter(Q(username=username) | Q(email=email))
             if u:
-                return render(request, 'register.html', {'msg': '此邮箱已被注册'})
+                return render(request, 'register.html', {'msg': '此用户名或邮箱已被注册'})
             else:
                 user_profile = UserProfile()
                 user_profile.email = email
-                user_profile.username = email
+                user_profile.username = username
                 user_profile.set_password(password)
                 user_profile.is_active = 0
                 user_profile.save()
                 send_email(email, 'register')
-                return HttpResponse('注册成功，去激活吧！')
+                return HttpResponse('注册成功，去激活吧！ <a href="http://127.0.0.1:8000">回到首页</a>')
         else:
             return render(request, 'register.html', {'user_register_form': user})
 
@@ -39,7 +40,7 @@ def user_active(request, code):
         emailobj = EmailVerify.objects.filter(code=code)
         if emailobj:
             email = emailobj[0].email
-            user = UserProfile.objects.filter(Q(username=email) | Q(email=email))
+            user = UserProfile.objects.filter(email=email)
             if user:
                 user[0].is_active = 1
                 user[0].save()
@@ -54,9 +55,9 @@ def user_login(request):
     else:
         user_form = UserLoginForm(request.POST)
         if user_form.is_valid():
-            email = user_form.cleaned_data['email']
+            username = user_form.cleaned_data['username']
             password = user_form.cleaned_data['password']
-            user = authenticate(username=email, password=password)
+            user = authenticate(username=username, password=password)
             if user:
                 if user.is_active == 1:
                     login(request, user)
@@ -118,14 +119,3 @@ def send_email(email, send_type):
         content = 'http://127.0.0.1:8000/user/password_reset/' + code
         send_mail(subject, content, EMAIL_HOST_USER, [email, ], html_message=content)
 
-
-def handler_404(request):
-    ret = render(request, '404.html')
-    ret.status_code = 404
-    return ret
-
-
-def handler_500(request):
-    ret = render(request, '500.html')
-    ret.status_code = 500
-    return ret

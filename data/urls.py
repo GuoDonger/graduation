@@ -1,9 +1,10 @@
 from django.urls import path
-from data.views import data
+from data.views import data_list, data_detail, data_search
 
 
 app_name = 'data'
 urlpatterns = [
-    path('', data, name='data_show'),
-
+    path('', data_list, name='data_list'),
+    path('<int:city_id>', data_detail, name='data_detail'),
+    path('data_search/', data_search, name='data_search'),
 ]

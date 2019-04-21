@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>中国雾霾网</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
+	<script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
+</head>
+<body>
+<div id="container">
+	<div id="wrapper">
+		<div id="header">
+			<div id="headertop">
+				<a href="{% url 'index' %}" class="replace" id="logo"><span></span></a>
+				<div id="loginarea">
+                {% if request.user.is_authenticated %}
+                    <p class="notlogin">欢迎您！</p>
+                    <p class="loginbut">
+                        <a class="butlogin" href="" >{{ request.user.username }}</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <a class="butlogin" href="{% url 'user:user_logout' %}">退出</a>
+                    </p>
+                {% else %}
+					<p class="notlogin">未登陆！</p>
+					<p class="loginbut">
+                        <a href="{% url 'user:user_login' %}" class="butlogin">登陆</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <a href="{% url 'user:user_register' %}" class="butlogin">注册</a>
+                    </p>
+                {% endif %}
+				</div>
+			</div>
+			<div id="placemainmenu">
+				<ul id="mainmenu">
+					<li><a href="{% url 'index' %}">网站首页</a></li>
+                    <li><a href="{% url 'harm' %}">雾霾危害</a></li>
+                    <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+					<li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+					<li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+					<li class="active"><a href="{% url 'about' %}">关于我们</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div id="content">
+            <ul id="breadcrumb">
+				<li><a href="{% url 'index' %}">首页</a></li>
+				<li class="last">关于我们</li>
+			</ul>
+			<div id="maincontent">
+				<div class="boxbig">
+					<h1 class="titlebig">关于我们</h1>
+					<div class="boxbigcontent">
+                        <p style="font-size: 15px">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该网站为个人开发，大部分内容皆来自于网络，
+                            包括一些链接，还有雾霾数据，新闻数据都来自于网络，在此感谢各位同志的的资源，此网站不用于商业用途，是个人兴趣开发，并无侵权之意。在此我要感谢
+                            以下几个网站：
+                        </p>
+                        <ul>
+                            <li><p>中国空气质量监测平台：</p><a href="https://www.aqistudy.cn">https://www.aqistudy.cn</a></li>
+                            <li><p>PM25.in：</p><a href="http://www.pm25.in">http://www.pm25.in</a></li>
+                            <li><p>绿色呼吸：</p><a href="http://www.pm25.com">http://www.pm25.com</a></li>
+                            <li><p>科学网：</p><a href="http://news.sciencenet.cn">http://news.sciencenet.cn</a></li>
+                            <li><p>淘宝网</p><a href="https://www.taobao.com/">https://www.taobao.com/</a></li>
+                        </ul>
+					</div>
+					<div class="boxbigcontentbottom"></div>
+				</div>
+			</div>
+			<div id="nav">
+				<div class="boxnav">
+					<h3 class="titlenav">联系方式</h3>
+					<div class="boxnavcontent">
+                        <p id="texttestimonial">
+							QQ：1074602800
+						</p>
+                        <p id="texttestimonial">
+							微信：p159654
+						</p>
+                        <p id="texttestimonial">
+                            微博：@物联网大咖
+						</p>
+                        <p id="texttestimonial">
+                            邮箱：18235445605@163.com
+						</p>
+                        <p id="texttestimonial">
+                            GitHub：GuoDonger
+						</p>
+					</div>
+				</div>
+                <div class="boxnav">
+					<h3 class="titlenav">微信公众平台</h3>
+					<div class="boxnavcontent">
+                        <img src="{% static 'images/zhenqiweixin.jpg' %}" alt="" style="width: 100%">
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer">
+			<p id="texttwitter"></p>
+			<ul id="menufooter">
+                <li><a href="{% url 'index' %}">网站首页</a></li>
+                <li><a href="{% url 'harm' %}">雾霾危害</a></li>
+                <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+                <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+                <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+                <li class="active"><a href="{% url 'about' %}">关于我们</a></li>
+			</ul>
+			<ul id="menufooterright">
+				<li>Copyright 2019, 张国栋, Inc.</li>
+				<li class="last"><a href="#">回到顶部</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

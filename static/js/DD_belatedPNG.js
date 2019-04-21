@@ -13,7 +13,7 @@
 
 /*
 PLEASE READ:
-Absolutely everything in this js is SILLY.  I know this.  IE's rendering of certain pixels doesn't make sense, so neither does this code!
+Absolutely everything in this script is SILLY.  I know this.  IE's rendering of certain pixels doesn't make sense, so neither does this code!
 */
 
 var DD_belatedPNG = {

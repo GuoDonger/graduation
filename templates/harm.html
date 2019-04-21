@@ -1,0 +1,152 @@
+<!DOCTYPE html >
+{% load staticfiles %}
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>中国雾霾网</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
+	<script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
+
+</head>
+<body>
+<div id="container">
+	<div id="wrapper">
+		<div id="header">
+			<div id="headertop">
+				<a href="{% url 'index' %}" class="replace" id="logo"><span></span></a>
+				<div id="loginarea">
+                {% if request.user.is_authenticated %}
+                    <p class="notlogin">欢迎您！</p>
+                    <p class="loginbut">
+                        <a class="butlogin" href="" >{{ request.user.username }}</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <a class="butlogin" href="{% url 'user:user_logout' %}">退出</a>
+                    </p>
+                {% else %}
+					<p class="notlogin">未登陆！</p>
+					<p class="loginbut">
+                        <a href="{% url 'user:user_login' %}" class="butlogin">登陆</a>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <a href="{% url 'user:user_register' %}" class="butlogin">注册</a>
+                    </p>
+                {% endif %}
+				</div>
+			</div>
+			<div id="placemainmenu">
+				<ul id="mainmenu">
+					<li><a href="{% url 'index' %}">网站首页</a></li>
+                    <li class="active"><a href="{% url 'harm' %}">雾霾危害</a></li>
+                    <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+                    <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+                    <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+                    <li><a href="{% url 'about' %}">关于我们</a></li>
+				</ul>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div id="content">
+            <ul id="breadcrumb">
+				<li><a href="{% url 'index' %}">首页</a></li>
+				<li class="last">雾霾危害</li>
+			</ul>
+			<div id="maincontent">
+				<div class="boxbig">
+					<h1 class="titlebig">雾霾的危害</h1>
+					<div class="boxbigcontent">
+						<ul class="listok">
+							<li><p style="font-size: 15px"><strong>影响人的身体健康</strong><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在灰霾天气出现时，人容易出现咳嗽、头晕、乏力等不良反应，材同时可吸人颗粒物能直接进人人体呼吸道和肺部诱发病症。灰霜天材气还可导致近地层紫外线辐射减弱，易使空气中传染性病菌活性增强,导致传染病增多。</p>
+                            </li>
+							<li><p style="font-size: 15px"><strong>影响大气形成酸雨</strong><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;灰霾本质是“细颗粒物污染”，主要来自工业废气、汽车尾气等  恶气体污染物经过系列化学反应所形成“二次污染物”。研究表明，  的灰霾组分中含水量很少,由硫酸、二氧化硫、二氧化氮等废气污染物方形成酸雾、酸雨。大量酸雨的形成降落，会导致作物枯萎、树木死亡，的也会抑制土壤中有机物的分解和氮的固定，淋洗与土壤离子结合的 钙镁、钾等营养元素,使土壤贫瘠化;还可使湖泊、河流酸化,并溶解土壤和水体底泥中的重金属进人水中，毒害鱼类;加速建筑物和学文物古迹的腐蚀和风化过程。</p>
+                            </li>
+                            <li><p style="font-size: 15px"><strong>影响作物生长生产</strong><br/>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;雾霾的主要成分是PM2.5,也就是指存在于空气中的细小颗粒物质。由于PM2.5的成分直径小于2.5微米，因此可以长时间在空气中悬浮而不会沉降，同时，悬浮在空气中的PM2.5成分很少受到空气流动的影响，当空气中大量存在这种颗粒性物质时,其可见度就会有明显的增加,最终成为雾箱天气。自然环境中存在的PM2.5成分较少，但是随着人类活动的不断增加,以及现代化工业的不断发展和扩展第霾的组成成分-颗粒性悬浮物不断增多,也就逐渐的形成了雾霾。</p>
+                            </li>
+						</ul>
+					</div>
+					<div class="boxbigcontentbottom"></div>
+				</div>
+                <div class="contentleft">
+					<div class="boxcontentsmall">
+						<h1 class="titlesmall">防霾小知识</h1>
+						<div class="boxsmallcontent">
+                            <ul class="menucontentsmall">
+                                <li>1、外出戴口罩：如果外出可以戴上口罩，这样可以有效防止粉尘颗粒进入体内。</li>
+                                <li>2、做好个人卫生：出门后入室内要及时洗脸、漱口、清理鼻腔，去掉身上所附带的污染残留物，以防PM2.5对人体的伤害。</li>
+                                <li>3、饮食清淡多喝水：雾天的饮食宜选择清淡易消化且富含维生素的食物，多饮水，多吃新鲜蔬菜和水果，这样不仅可以补充维生素和无机盐，还能起到润肺除燥、祛痰止咳、健脾补肾的作用。</li>
+                                <li>4、适量补充维生素D：这个季节雾多、日照少，由于紫外线照射不足，人体内维生素D生成不足，必要时可补充一些。</li>
+                            </ul>
+                        </div>
+						<div class="boxsmcontentbottom"></div>
+					</div>
+				</div>
+				<div class="contentright">
+					<div class="boxcontentsmall">
+						<h1 class="titlesmall">相关文章</h1>
+						<div class="boxsmallcontent">
+							<ul class="menucontentsmall">
+                                <li><a href="https://baijiahao.baidu.com/s?id=1624266929711874770">伦敦雾霾事件</a></li>
+                                <li><a href="https://baijiahao.baidu.com/s?id=1618460646915723491">雾霾会使人变笨</a></li>
+                                <li><a href="https://baijiahao.baidu.com/s?id=1617278108620208039">雾霾对孩子的危害</a></li>
+                                <li><a href="https://baijiahao.baidu.com/s?id=1617726274655419832">雾霾伤害人的皮肤健康</a></li>
+                                <li class="last"><a href="https://www.toutiao.com/a6679926633710748174/">雾霾对农作物的危害</a></li>
+							</ul>
+						</div>
+						<div class="boxsmcontentbottom"></div>
+					</div>
+				</div>
+			</div>
+			<div id="nav">
+				<div class="boxnav">
+					<h3 class="titlenav">时事资料</h3>
+					<div class="boxnavcontent">
+						<ul class="menunav">
+                            <li><a href="http://d.wanfangdata.com.cn/Thesis_Y2197827.aspx">PM2.5成分与高血压相关心脑血管疾病急诊的关系及对RAS基因表达的影响</a></li>
+                            <li><a href="http://wenku.baidu.com/link?url=exTWcMo5R63fMHlVWTsmmYTwRYuRa8SYBSJyEo0G1XzsRx-riR887T_hN4GAUTHRvrrBQrZ8xsQufAj7mEGEDFl-Tzv1L67pzWaop6Q1cN7">北京地区PM2.5的成分特征及来源分析</a></li>
+                            <li><a href="http://d.wanfangdata.com.cn/Thesis_Y2105736.aspx">PM2.5暴露对肺炎克雷伯菌致大鼠肺部炎症的影响</a></li>
+                            <li><a href="http://link.springer.com/article/10.1007%2Fs11069-011-9936-z?LI=true">中国城市能源消耗对健康影响的评价：基于吸入反应系数的分析</a></li>
+                            <li><a href="http://www.sciencedirect.com/science/article/pii/S1352231009000661">中国广州肺癌死亡和对空气污染的关系研究</a></li>
+                            <li class="last"><a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2367664/">燃煤大气污染物对中国孕妇以及儿童发展的影响</a></li>
+                        </ul>
+{#						<a href="{% url 'news:news_list' %}" class="linkreadmore">更多新闻</a>#}
+					<div class="clear"></div>
+					</div>
+				</div>
+				<div class="boxnav">
+					<h3 class="titlenav">防霾工具</h3>
+					<div class="boxnavcontent">
+                        <ul class="menunav">
+                            <li><a href="https://detail.tmall.com/item.htm?id=572662314530&ali_refid=a3_430673_1006:1122562605:N:gS7U4oIW0ElfkzAYzpPHxw==:ebb396d26ee4d352b2af2b94d4d1a18c&ali_trackid=1_ebb396d26ee4d352b2af2b94d4d1a18c&spm=a2e15.8261149.07626516002.2">空气净化器</a></li>
+                            <li><a href="https://item.taobao.com/item.htm?id=533721705686&ali_refid=a3_430673_1006:1123175555:N:vaeA3FC9tQ8NsJnWwc90QG%2FYUBBQ2Kdo:7d51bb2161bba824c95343616a192d54&ali_trackid=1_7d51bb2161bba824c95343616a192d54&spm=a231k.8165028.0782702702.2">防霾口罩</a></li>
+                            <li><a href="https://item.taobao.com/item.htm?id=9355735770&ali_refid=a3_430673_1006:1103052178:N:IUXY8IksWqgDnQWviodf0A%3D%3D:aed773ea096c2012cf1c042f69fec095&ali_trackid=1_aed773ea096c2012cf1c042f69fec095&spm=a231k.8165028.0782702702.5">防雾霾纱网</a></li>
+                            <li><a href="https://detail.tmall.com/item.htm?id=38871525026&ali_refid=a3_430673_1006:1109519158:N:qu8i8DCNfLrS2aQfh/6AzQ==:2aa95e30fe586fb585539e5f02e27890&ali_trackid=1_2aa95e30fe586fb585539e5f02e27890&spm=a231k.8165028.0782702702.3">隐形口罩</a></li>
+                            <li class="last"><a href="https://item.taobao.com/item.htm?id=584764067815&ali_refid=a3_430673_1006:1121640052:N:kxwdZVsO087I6C5HeaZZ6YAIX0210ooU:97d88e8fe4844043d47201dfc063a9f5&ali_trackid=1_97d88e8fe4844043d47201dfc063a9f5&spm=a231k.8165028.0782702702.1">便携空气净化器</a></li>
+                        </ul>
+						<a href="{% url 'news:news_list' %}" class="linkreadmore">更多工具</a>
+					<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer">
+			<p id="texttwitter"></p>
+			<ul id="menufooter">
+				<li><a href="{% url 'index' %}">网站首页</a></li>
+                <li class="active"><a href="{% url 'harm' %}">雾霾危害</a></li>
+                <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+                <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+                <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+                <li><a href="{% url 'about' %}">关于我们</a></li>
+			</ul>
+			<ul id="menufooterright">
+				<li>Copyright 2019, 张国栋, Inc.</li>
+				<li class="last"><a href="#">回到顶部</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

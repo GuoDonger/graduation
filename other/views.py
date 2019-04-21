@@ -8,13 +8,25 @@ def index(request):
     return render(request, 'index.html', {'banner': banner})
 
 
-def knowledge(request):
-    return render(request, 'knowledge.html')
+def harm(request):
+    return render(request, 'harm.html')
 
 
-def contact(request):
-    return render(request, 'contact.html')
+def governance(request):
+    return render(request, 'governance.html')
 
 
-# def data(request):
-#     return render(request, 'data.html')
+def about(request):
+    return render(request, 'about.html')
+
+
+def handler_404(request):
+    ret = render(request, '404.html')
+    ret.status_code = 404
+    return ret
+
+
+def handler_500(request):
+    ret = render(request, '500.html')
+    ret.status_code = 500
+    return ret

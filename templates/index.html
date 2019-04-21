@@ -5,28 +5,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>中国雾霾网</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
 	<script src="{% static 'js/jquery.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/ui_core.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/ui_tabs.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/lightbox.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/easing.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/jcarousel.js' %}" type="text/javascript"></script>
 	<script src="{% static 'js/slideshow.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/twitter.js' %}" type="text/javascript"></script>
-	<script src="{% static 'js/gettwitter.js' %}" type="text/javascript"></script>
-	<script type="text/javascript">
-	$(function() {
-		$("#butslide").click(function(){
-				$("#panellogin").slideToggle("fast");
-				$(this).toggleClass("active"); return false;
-		}); 
-		$('#tabsnav').tabs({ fx: { opacity: 'toggle' } });
-		$('a.popup').lightBox({fixedNavigation:true});
-	});
-	</script>
+	<script src="{% static 'js/jcarousel.js'%}" type="text/javascript"></script>
 </head>
 <body>
-<p><a class="skiplink" href="#maincontent"></a></p>
 <div id="container">
 	<div id="wrapper">
 		<div id="header">
@@ -53,28 +37,29 @@
 			<div id="placemainmenu">
 				<ul id="mainmenu">
 					<li class="active"><a href="{% url 'index' %}">网站首页</a></li>
-					<li><a href="{% url 'knowledge' %}">雾霾知识</a></li>
-					<li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
-					<li><a href="{% url 'data:data_show' %}">数据展示</a></li>
-					<li><a href="{% url 'contact' %}">联系我们</a></li>
+                    <li><a href="{% url 'harm' %}">雾霾危害</a></li>
+                    <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+                    <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+                    <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+                    <li><a href="{% url 'about' %}">关于我们</a></li>
 				</ul>
 				<div class="clear"></div>
 			</div>
 		</div>
 		<div id="content">
-			<div id="intro">
+            <div id="intro">
 				<div id="placeslideshow">
 					<div id="slideshow">
 						<div id="shadowslideshow"></div>
 						<ul>
-                            {% for ban in banner %}
-                                <li><img src="{{ MEDIA_URL }}{{ ban.image }}" alt="Slideshow" /></li>
+							{% for ban in banner %}
+                                <li><img src="{{ MEDIA_URL }}{{ ban.image }}" alt="Slideshow"/></li>
                             {% endfor %}
 						</ul>
 					</div>
 					<div id="captionslideshow">
 						<ul>
-                            {% for ban in banner %}
+							{% for ban in banner %}
                                 <li>{{ ban.title }}</li>
                             {% endfor %}
 						</ul>
@@ -82,9 +67,9 @@
 				</div>
 				<div id="introright">
 					<ul>
-                        {% for ban in banner %}
+						 {% for ban in banner %}
                         <li><h1>{{ ban.title }}</h1>
-							<p>{{ ban.content }}</p></li>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ ban.content }}</p></li>
                         {% endfor %}
 					</ul>
 					<div id="placenav"><a href="#" class="replace" id="butprev"><span></span>Prev</a> <a href="#" class="replace" id="butnext"><span></span>Next</a></div>
@@ -94,99 +79,47 @@
 				<div class="boxbig">
 					<h1 class="titlebig">什么是雾霾？</h1>
 					<div class="boxbigcontent">
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;雾霾是指由大气中空气动力学直径不足2.5微米的微小烟尘、细小粉尘、硫酸盐、硝酸盐、铵盐、有机物构成的颗粒物和水珠共同形成的微小颗粒物(PM2.5)，会使空气呈现灰色、黄色、红色，甚至浑浊不清。PM2.5较为微小，覆盖面广，活力强，易与重金属、微生物融为一体，并能长时间附着于空中，使空气质量变差、能见度降低。随着PM2.5的浓度增加，空气污染会变得越来越严重。</p>
-						<h3>雾霾的成因</h3>
-						<ul class="listok">
-							<li><p><strong>人为因素</strong><br/>
-								研究表明,PM2.5的主要成分是硫氧化物和氮氧化物，这些污染物的来源主要是石油、煤炭等化石燃料的燃烧，以及一些如植物秸秆等物质的不完全燃烧。通过近几年的观察研究数据我们不难发现，我国的CDP价值较高的工业结构区域雾霾的发生频率远远高!于其他区域，特别是北方冬季大面积供暖,污染现象更为严重,募霾天气也更多。此外,第霾产生的原因还包括汽车尾气排放、煤炭能源的利用等。因此，可以说产业结构不合理是人为原因造成雾霾产生的最直接表现。</p>
+                        <h2>基本含义</h2>
+                            <p style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;雾霾，顾名思义是雾和霾。但是雾和霾的区别很大。空气中的灰尘、硫酸、硝酸等颗粒物组成的气溶胶系统造成视觉障碍的叫霾。霾就是灰霾（烟霞）。</p>
+                            <p style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;雾是由大量悬浮在近地面空气中的微小水滴或冰晶组成的气溶胶系统。多出现于秋冬季节（这也是2013年1月份全国大面积雾霾天气的原因之一），是近地面层空气中水汽凝结（或凝华）的产物。雾的存在会降低空气透明度，使能见度恶化，如果目标物的水平能见度降低到1000米以内，就将悬浮在近地面空气中的水汽凝结（或凝华）物的天气现象称为雾（Fog）。</p>
+                            <p style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;霾（mái），也称灰霾（烟雾） 空气中的灰尘、硫酸、硝酸、有机碳氢化合物等粒子也能使大气混浊。将目标物的水平能见度在1000～10000米的这种现象称为轻雾或霭（Mist）。形成雾时大气湿度应该是饱和的(如有大量凝结核存在时，相对湿度不一定达到100%就可能出现饱和)。由于液态水或冰晶组成的雾散射的光与波长关系不大，因而雾看起来呈乳白色或青白色和灰色。</p>
+                            <p style="font-size: 13px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;雾霾天气是一种大气污染状态，雾霾是对大气中各种悬浮颗粒物含量超标的笼统表述，尤其是PM2.5（空气动力学当量直径小于等于2.5微米的颗粒物）被认为是造成雾霾天气的“元凶”。随着空气质量的恶化，阴霾天气现象出现增多，危害加重。中国不少地区把阴霾天气现象并入雾一起作为灾害性天气预警预报。统称为“雾霾天气”。</p>
+                        <h2>雾霾成因</h2>
+                        <ul class="listok">
+							<li><p style="font-size: 13px"><strong>人为因素</strong><br/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;研究表明,PM2.5的主要成分是硫氧化物和氮氧化物，这些污染物的来源主要是石油、煤炭等化石燃料的燃烧，以及一些如植物秸秆等物质的不完全燃烧。通过近几年的观察研究数据我们不难发现，我国的CDP价值较高的工业结构区域雾霾的发生频率远远高!于其他区域，特别是北方冬季大面积供暖,污染现象更为严重,募霾天气也更多。此外,第霾产生的原因还包括汽车尾气排放、煤炭能源的利用等。因此，可以说产业结构不合理是人为原因造成雾霾产生的最直接表现。</p>
 							</li>
-							<li><p><strong>自然因素</strong><br/>
-								雾霾的主要成分是PM2.5,也就是指存在于空气中的细小颗粒物质。由于PM2.5的成分直径小于2.5微米，因此可以长时间在空气中悬浮而不会沉降，同时，悬浮在空气中的PM2.5成分很少受到空气流动的影响，当空气中大量存在这种颗粒性物质时,其可见度就会有明显的增加,最终成为雾箱天气。自然环境中存在的PM2.5成分较少，但是随着人类活动的不断增加,以及现代化工业的不断发展和扩展第霾的组成成分-颗粒性悬浮物不断增多,也就逐渐的形成了雾霾。</p>
+							<li><p style="font-size: 13px"><strong>自然因素</strong><br/>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;雾霾的主要成分是PM2.5,也就是指存在于空气中的细小颗粒物质。由于PM2.5的成分直径小于2.5微米，因此可以长时间在空气中悬浮而不会沉降，同时，悬浮在空气中的PM2.5成分很少受到空气流动的影响，当空气中大量存在这种颗粒性物质时,其可见度就会有明显的增加,最终成为雾箱天气。自然环境中存在的PM2.5成分较少，但是随着人类活动的不断增加,以及现代化工业的不断发展和扩展第霾的组成成分-颗粒性悬浮物不断增多,也就逐渐的形成了雾霾。</p>
 							</li>
 						</ul>
-                        <h3>雾霾的危害</h3>
-						<ul class="listok">
-							<li><p><strong>影响人的身体健康</strong><br/>
-                                在灰霾天气出现时，人容易出现咳嗽、头晕、乏力等不良反应，材同时可吸人颗粒物能直接进人人体呼吸道和肺部诱发病症。灰霜天材气还可导致近地层紫外线辐射减弱，易使空气中传染性病菌活性增强,导致传染病增多。</p>
-                            </li>
-							<li><p><strong>影响大气形成酸雨</strong><br/>
-                                灰霾本质是“细颗粒物污染”，主要来自工业废气、汽车尾气等  恶气体污染物经过系列化学反应所形成“二次污染物”。研究表明，  的灰霾组分中含水量很少,由硫酸、二氧化硫、二氧化氮等废气污染物方形成酸雾、酸雨。大量酸雨的形成降落，会导致作物枯萎、树木死亡，的也会抑制土壤中有机物的分解和氮的固定，淋洗与土壤离子结合的 钙镁、钾等营养元素,使土壤贫瘠化;还可使湖泊、河流酸化,并溶解土壤和水体底泥中的重金属进人水中，毒害鱼类;加速建筑物和学文物古迹的腐蚀和风化过程。</p>
-                            </li>
-                            <li><p><strong>影响作物生长生产</strong><br/>
-                                雾霾的主要成分是PM2.5,也就是指存在于空气中的细小颗粒物质。由于PM2.5的成分直径小于2.5微米，因此可以长时间在空气中悬浮而不会沉降，同时，悬浮在空气中的PM2.5成分很少受到空气流动的影响，当空气中大量存在这种颗粒性物质时,其可见度就会有明显的增加,最终成为雾箱天气。自然环境中存在的PM2.5成分较少，但是随着人类活动的不断增加,以及现代化工业的不断发展和扩展第霾的组成成分-颗粒性悬浮物不断增多,也就逐渐的形成了雾霾。</p>
-                            </li>
-						</ul>
-					</div>
+                    </div>
 					<div class="boxbigcontentbottom"></div>
-				</div>
-				<div class="contentleft">
-					<div class="boxcontentsmall">
-						<h1 class="titlesmall">防霾小知识</h1>
-						<div class="boxsmallcontent">
-                            <p>遇到雾霾天气的时候，尽量减少外出活动的次数，和晨练的次数，尽量在室内活动，这样可以避免外出活动的过程中人体吸入大量的有害气体，从而影响人们的身体健康，尤其是有心脑血管的朋友，要更加注意了。</p>
-                            <p>遇到雾霾天气，应该避免开窗户通风，因为开窗户会让外面的污染空气进到室内，最好是关上窗户，这样可以避免一些有害气体的入侵。</p>
-						</div>
-						<div class="boxsmcontentbottom"></div>
-					</div>
-				</div>
-				<div class="contentright">
-					<div class="boxcontentsmall">
-						<h1 class="titlesmall">相关链接</h1>
-						<div class="boxsmallcontent">
-							<ul class="menucontentsmall">
-								<li><a href="http://www.ehvacr.com/zt/pm25.html">中国雾霾防控网</a></li>
-								<li><a href="http://www.pm25china.net/">雾霾监测网</a></li>
-                                <li><a href="http://www.caepi.org.cn/">中国环境保护产业协会</a></li>
-								<li><a href="http://www.chinaenvironment.com/">环保网</a></li>
-								<li><a href="http://www.mee.gov.cn/">中华人民共和国生态环境部</a></li>
-								<li class="last"><a href="http://www.zghjjcw.com/">中国环境监测网</a></li>
-							</ul>
-						</div>
-						<div class="boxsmcontentbottom"></div>
-					</div>
 				</div>
 			</div>
 			<div id="nav">
-				
 				<div class="boxnav">
-					<h3 class="titlenav">最新新闻</h3>
+					<h3 class="titlenav">相关知识</h3>
 					<div class="boxnavcontent">
-						<ul class="menunav">
-							<li><a href="#">新闻一</a></li>
-							<li><a href="#">新闻二</a></li>
-							<li><a href="#">新闻三</a></li>
-							<li><a href="#">新闻四</a></li>
-							<li><a href="#">新闻五</a></li>
-                            <li><a href="#">新闻一</a></li>
-							<li><a href="#">新闻二</a></li>
-							<li><a href="#">新闻三</a></li>
-							<li><a href="#">新闻四</a></li>
-							<li><a href="#">新闻五</a></li>
-							<li class="last"><a href="#">新闻六</a></li>
-						</ul>
-						<a href="news_list.html" class="linkreadmore">更多新闻</a>
-					<div class="clear"></div>
+                        <ul class="menunav">
+                            <li><a href="https://www.sohu.com/a/210797033_100007652">关于雾霾的八个知识点</a></li>
+                            <li><a href="http://www.baike.com/wiki/PM2.5">什么是PM2.5</a></li>
+                            <li><a href="http://songshuhui.net/archives/62570">关于PM2.5的十个问答</a></li>
+                            <li><a href="http://www.szhec.gov.cn/pages/szepb/kqzl/MpKnowledge.html">什么是空气质量指数(AQI)</a></li>
+                            <li class="last"><a href="http://www.szhec.gov.cn/pages/szepb/kqzl/MpKnowledge1.html">空气质量新标准</a></li>
+                        </ul>
 					</div>
 				</div>
-				<div class="boxnav">
-					<h3 class="titlenav">名人名言</h3>
+                <div class="boxnav">
+					<h3 class="titlenav">相关链接</h3>
 					<div class="boxnavcontent">
-						<p id="texttestimonial">
-							绿水青山就是金山银山
-						</p>
-                        <p id="texttestimonial">
-							要像保护眼睛一样保护生态环境
-						</p>
-                        <p id="texttestimonial">
-                            良好生态环境是最普惠的民生福祉
-						</p>
-                        <p id="texttestimonial">
-                            生态兴则文明兴，生态衰则文明衰
-						</p>
-                        <p id="texttestimonial">
-                            山水林田湖草是生命共同体
-						</p>
-						<p id="testimonialname"><strong>习近平</strong></p>
+						<ul class="menunav">
+                            <li><a href="http://www.mee.gov.cn/">中华人民共和国生态环境部</a></li>
+                            <li><a href="http://www.zghjjcw.com/">中国环境监测网</a></li>
+                            <li><a href="http://www.pm25china.net/">雾霾监测网</a></li>
+                            <li><a href="http://www.chinaenvironment.com/">环保网</a></li>
+                            <li class="last"><a href="http://www.ehvacr.com/zt/pm25.html">中国雾霾防控网</a></li>
+                        </ul>
 					</div>
 				</div>
 			</div>
@@ -195,11 +128,12 @@
 		<div id="footer">
 			<p id="texttwitter"></p>
 			<ul id="menufooter">
-				<li><a href="{% url 'index' %}">网站首页</a></li>
-				<li><a href="{% url 'knowledge' %}">雾霾知识</a></li>
-				<li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
-				<li><a href="{% url 'data:data_show' %}">数据展示</a></li>
-				<li class="last"><a href="{% url 'contact' %}">联系我们</a></li>
+				<li class="active"><a href="{% url 'index' %}">网站首页</a></li>
+                <li><a href="{% url 'harm' %}">雾霾危害</a></li>
+                <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+                <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
+                <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
+                <li><a href="{% url 'about' %}">关于我们</a></li>
 			</ul>
 			<ul id="menufooterright">
 				<li>Copyright 2019, 张国栋, Inc.</li>
