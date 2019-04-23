@@ -3,9 +3,9 @@ import pymysql
 import time
 from lxml import etree
 from bs4 import BeautifulSoup
-from celery import shared_task
+from celery import shared_task, task
 from data.content import HOST, PORT, USER, PASSWORD, CHARSET, DATABASE, HEADERS
-
+from data.models import Data
 
 base_url = 'http://www.pm25.in'
 sql_select = 'select * from data_city;'
@@ -41,3 +41,22 @@ def get_data():
         print('success')
     connect.close()
 
+
+@task
+def get_order():
+    datas = Data.objects.all().order_by('AQI')
+    ranks = {}
+    for data in datas:
+        if 0 < data.AQI <= 50:
+            ranks[data] = '优质'
+        elif 50 < data.AQI <= 100:
+            ranks[data] = '良好'
+        elif 100 < data.AQI <= 150:
+            ranks[data] = '轻度污染'
+        elif 150 < data.AQI <= 200:
+            ranks[data] = '中度污染'
+        elif 200 < data.AQI <= 300:
+            ranks[data] = '重度污染'
+        else:
+            ranks[data] = '严重污染'
+    return ranks

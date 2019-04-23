@@ -66,10 +66,10 @@
                                     <h2><a href="{% url 'news:news_detail' news.id %}">{{ news.title }}</a></h2>
 								    <ul class="listinfo">
 									    <li class="posted">来源：<strong>{{ news.source }}&nbsp;&nbsp;</strong>{{ news.add_time }}</li>
-                                        <li>{{ news.category.name }}</li>
+                                        <li><a href="{% url 'news:news_category' news.category.id %}">{{ news.category.name }}</a></li>
 									    <li class="comment"><a href="{% url 'news:news_detail' news.id %}" class="linkcomment">{{ news.comment_set.count }}</a></li>
 								    </ul>
-								    <p>{{ news.digest }}...</p>
+								    <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ news.digest }}...</p>
 								    <a href="{% url 'news:news_detail' news.id %}" class="linkreadmore">更多</a>
 								    <div class="clear"></div>
 							    </li>
@@ -95,6 +95,16 @@
 				</div>
 			</div>
 			<div id="nav">
+                <div class="boxnav">
+					<h3 class="titlenav">新闻频道</h3>
+					<div class="boxnavcontent">
+						<ul class="menunav">
+                            {% for category in categories %}
+                                <li><a href="{% url 'news:news_category' category.id %}">{{ category.name }}</a></li>
+                            {% endfor %}
+						</ul>
+					</div>
+				</div>
 				<div class="boxnav">
 					<h3 class="titlenav">新闻网站</h3>
 					<div class="boxnavcontent">

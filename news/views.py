@@ -31,6 +31,7 @@ def news(request):
 def news_category(request, category_id):
     category = Category.objects.filter(id=category_id)[0]
     news_list = News.objects.all().filter(category_id=category_id)
+    categories = Category.objects.all()
     page_num = request.GET.get('page', 1)
     paginator = Paginator(news_list, 10)
     try:
@@ -39,14 +40,34 @@ def news_category(request, category_id):
         page_list = paginator.page(1)
     except EmptyPage:
         page_list = paginator.page(paginator.num_pages)
-    return render(request, 'news_category.html', {'news_list': news_list, 'page_list': page_list, 'category': category})
+    return render(request, 'news_category.html',
+                  {'news_list': news_list, 'page_list': page_list, 'category': category, 'categories': categories})
+
+
+def news_search(request):
+    search = request.POST.get('search')
+    news_list = News.objects.all().filter(title__contains=search)
+    categories = Category.objects.all()
+    if news_list:
+        page_num = request.GET.get('page', 1)
+        paginator = Paginator(news_list, 10)
+        try:
+            page_list = paginator.page(page_num)
+        except PageNotAnInteger:
+            page_list = paginator.page(1)
+        except EmptyPage:
+            page_list = paginator.page(paginator.num_pages)
+        return render(request, 'news_search.html',
+                      {'news_list': news_list, 'page_list': page_list, 'categories': categories})
+    else:
+        return HttpResponse('无相关新闻 <a href="http://127.0.0.1:8000/news/">返回</a>')
 
 
 def news_detail(request, news_id):
     single_news = News.objects.filter(pk=news_id)[0]
     content = Content.objects.all().filter(news_id=news_id)
-    comments = Comment.objects.filter(news=news_id).all()
     other_news = News.objects.filter(category=single_news.category)[:5]
+    comments = Comment.objects.filter(news=news_id).all()
     page_num = request.GET.get('page', 1)
     paginator = Paginator(comments, 5)
     try:
@@ -56,8 +77,8 @@ def news_detail(request, news_id):
     except EmptyPage:
         page_list = paginator.page(paginator.num_pages)
     return render(request, 'news_detail.html',
-                  {'news': single_news, 'comments': comments, 'other_news': other_news, 'page_list': page_list,
-                   'content': content})
+                  {'news': single_news, 'content': content, 'comments': comments, 'other_news': other_news,
+                   'page_list': page_list})
 
 
 def news_comment(request, news_id):
@@ -70,20 +91,3 @@ def news_comment(request, news_id):
     comment.content = content
     comment.save()
     return redirect(reverse('news:news_detail', kwargs={'news_id': news_id}))
-
-
-def news_search(request):
-    search = request.POST.get('search')
-    news_list = News.objects.all().filter(title__contains=search)
-    if news_list:
-        page_num = request.GET.get('page', 1)
-        paginator = Paginator(news_list, 10)
-        try:
-            page_list = paginator.page(page_num)
-        except PageNotAnInteger:
-            page_list = paginator.page(1)
-        except EmptyPage:
-            page_list = paginator.page(paginator.num_pages)
-        return render(request, 'news_search.html', {'news_list': news_list, 'page_list': page_list})
-    else:
-        return HttpResponse('无相关新闻 <a href="http://127.0.0.1:8000/news/">返回</a>')

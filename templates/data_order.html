@@ -55,19 +55,29 @@
             <ul id="breadcrumb">
 				<li><a href="{% url 'index' %}">首页</a></li>
                 <li><a href="{% url 'data:data_list' %}">查询</a></li>
-				<li class="last">详情</li>
+				<li class="last">排行榜</li>
 			</ul>
 			<div id="maincontent">
 				<div class="boxbig">
-					<h1 class="titlebig">{{ datas.city.city }}&nbsp;&nbsp;数据更新时间：{{ datas.time }}</h1>
+					<h1 class="titlebig">空气质量排行榜</h1>
 					<div class="boxbigcontent">
-                        {% autoescape off %}
-                            {{ datas.data }}
-                        {% endautoescape %}
-                        <div id="chart1" style="width: 617px; height: 300px"></div>
-                        <div id="chart2" style="width: 617px; height: 300px"></div>
-                        <a href="{% url 'data:data_order'%}" class="linkreadmore" style="font-size: 15px">详细排行榜</a>
-						<div class="clear"></div>
+                        <table class="newtable">
+                            <tr>
+                                <th>排名</th>
+                                <th>城市</th>
+                                <th>空气质量</th>
+                                <th>AQI</th>
+                            </tr>
+                            {% for data,rank in ranks.items %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ data.city.city }}</td>
+                                    <td>{{ rank }}</td>
+                                    <td>{{ data.AQI }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                        <div class="clear"></div>
 					</div>
 					<div class="boxbigcontentbottom"></div>
 				</div>
@@ -132,92 +142,6 @@
 		</div>
 	</div>
 </div>
-    <script src="{% static 'js/echarts.min.js' %}"></script>
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script>
-        var myChart = echarts.init(document.getElementById('chart1'));
-        var option = {
-            title: {
-                text:'空气质量指数(AQI)排名前十',
-            },
-            tooltip: {},
-            legend: {
-                data:['AQI']
-            },
 
-            xAxis: {
-                axisLabel: {
-                    interval:0,
-                    rotate:40
-                },
-                data: {{ area1 | safe }}
-            },
-            yAxis: {
-                min: 0,
-                max: 500,
-            },
-            series: [{
-                name: 'AQI',
-                type: 'bar',
-                barWidth : '50%',
-                itemStyle : {
-				    normal : {
-					    label: {
-				          show: true,
-				          position: 'top',
-                          textStyle: {
-                              color: 'black'
-				            }
-				        }
-				    },
-			    },
-                data: {{ AQI1 }}
-
-            }]
-        };
-        myChart.setOption(option);
-    </script>
-    <script>
-        var myChart = echarts.init(document.getElementById('chart2'));
-        var option = {
-            title: {
-                text:'空气质量指数(AQI)排名倒十',
-            },
-            tooltip: {},
-            legend: {
-                data:['AQI']
-            },
-
-            xAxis: {
-                axisLabel: {
-                    interval:0,
-                    rotate:40
-                },
-                data: {{ area2 | safe }}
-            },
-            yAxis: {
-                min: 0,
-                max: 500,
-            },
-            series: [{
-                name: 'AQI',
-                type: 'bar',
-                barWidth : '50%',
-                itemStyle : {
-				    normal : {
-					    label: {
-				          show: true,
-				          position: 'top',
-				          textStyle: {
-				            color: 'black'
-				            }
-				        }
-				    },
-			    },
-                data: {{ AQI2 }}
-            }]
-        };
-        myChart.setOption(option);
-    </script>
 </body>
 </html>
