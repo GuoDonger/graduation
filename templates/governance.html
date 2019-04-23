@@ -76,13 +76,12 @@
 					<h3 class="titlenav">政府政策</h3>
 					<div class="boxnavcontent">
 						<ul class="menunav">
-                            <li><a href="http://www.pm25.com/news/795.html">中国将增投680亿元改善成品油质量 加大力度治理雾霾</a></li>
-                            <li><a href="http://www.pm25.com/news/790.html">河北省治霾进入精细化模式 PM2.5浓度连续4个月下降</a></li>
-                            <li><a href="http://www.pm25.com/news/780.html">京津冀齐发力雾霾治理 2017年控煤或超过一亿吨</a></li>
-                            <li><a href="http://www.pm25.com/news/774.html">各路“神器”力保鹭岛“小清新” 今年岛内空气质量不赖</a></li>
-                            <li class="last"><a href="http://www.pm25.com/news/77.html">为净化空气质量沪将首推4000辆“环保的士”</a></li>
+                            {% for new in news %}
+                                <li><a href="{% url 'news:news_detail' new.id %}">{{ new.title }}</a></li>
+                            {% endfor %}
+                            <li class="last"><a href="{% url 'news:news_category' 1 %}" class="linkreadmore">更多新闻</a></li>
                         </ul>
-                        <a href="http://www.pm25.com/news/cat/15" class="linkreadmore">更多新闻</a>
+
                         <div class="clear"></div>
 					</div>
 				</div>

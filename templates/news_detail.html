@@ -130,7 +130,7 @@
                             {% for other_new in other_news %}
                                 <li><a href="{% url 'news:news_detail' other_new.id %}">{{ other_new.title }}</a></li>
                             {% endfor %}
-							<li class="last"><a href="{% url 'news:news_list' %}">更多</a></li>
+							<li class="last"><a href="{% url 'news:news_list' %}">更多新闻</a></li>
 						</ul>
 					</div>
 				</div>

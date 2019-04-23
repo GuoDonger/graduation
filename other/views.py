@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from other.models import Banner
+from news.models import News
 
 
 # Create your views here.
@@ -13,7 +14,8 @@ def harm(request):
 
 
 def governance(request):
-    return render(request, 'governance.html')
+    news = News.objects.all().filter(category_id=1).order_by('-add_time')[:5]
+    return render(request, 'governance.html', {'news': news})
 
 
 def about(request):

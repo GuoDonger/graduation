@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't**+!9d$i%rj2+ke8^r02#x!+7d$utl^@2c_hm6$w#&&gvr53a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -128,9 +128,9 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 # 开发时
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # 上线时
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
@@ -148,4 +148,3 @@ handler500 = 'user.views.handler_500'
 BROKER_URL = 'amqp://guodong:123456@123.56.23.97:5672/vhost1'
 BROKER_TRANSPORT = 'amqp'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-
