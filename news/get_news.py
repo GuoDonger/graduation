@@ -10,14 +10,14 @@ base_url = 'http://www.pm25.com/news/'
 connect = pymysql.connect(host=HOST, port=PORT, user=USER, password=PASSWORD, database=DATABASE, charset=CHARSET)
 cursor = connect.cursor()
 
-# cate = ['政府政策', '行业报告', '各地新闻', '特殊人群防护', '疾病防护', 'PM2.5专题', 'PM2.5科普', '其他']
-#
-# for category in cate:
-#     sql = 'insert into news_category(name) value(%s)'
-#     cursor.execute(sql, [category])
-#     connect.commit()
+cate = ['政府政策', '行业报告', '各地新闻', '特殊人群防护', '疾病防护', 'PM2.5专题', 'PM2.5科普']
 
-for num in range(330, 1035):# 1035
+for category in cate:
+    sql = 'insert into news_category(name) value(%s)'
+    cursor.execute(sql, [category])
+    connect.commit()
+
+for num in range(60, 1035):# 1035
     try:
         url = base_url + str(num) + '.html'
         response = requests.get(url=url, headers=HEADERS)
@@ -33,7 +33,6 @@ for num in range(330, 1035):# 1035
         add_time = time.mktime(time.strptime(add_time, "%Y-%m-%d  %H:%M:%S"))
         add_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(add_time))
         contents = tree.xpath('//div[@class="news_details"]/p/text()')
-
     except Exception as error:
         print(error)
         continue
@@ -52,8 +51,6 @@ for num in range(330, 1035):# 1035
         category_id = '6'
     elif category == 'PM2.5科普':
         category_id = '7'
-    elif category == '今日头条':
-        category_id = '8'
     sql = "insert into news_news(category_id,title,source,add_time,image,digest) values(%s,%s,%s,%s,%s,%s);"
     cursor.execute(sql, [category_id, title, source, add_time, image,digest])
     connect.commit()

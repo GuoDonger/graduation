@@ -67,13 +67,15 @@
                                 <th>城市</th>
                                 <th>空气质量</th>
                                 <th>AQI</th>
+                                <th>PM2.5</th>
                             </tr>
-                            {% for data,rank in ranks.items %}
+                            {% for data in datas %}
                                 <tr>
                                     <td>{{ forloop.counter }}</td>
-                                    <td>{{ data.city.city }}</td>
-                                    <td>{{ rank }}</td>
+                                    <td><a href="{% url 'data:data_detail' data.city_id %}">{{ data.city.city }}</a></td>
+                                    <td>{{ data.rank }}</td>
                                     <td>{{ data.AQI }}</td>
+                                    <td>{{ data.PM25 }}</td>
                                 </tr>
                             {% endfor %}
                         </table>

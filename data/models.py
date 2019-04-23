@@ -20,6 +20,8 @@ class Data(models.Model):
     time = models.DateTimeField(verbose_name='时间')
     data = models.TextField(verbose_name='数据')
     AQI = models.IntegerField(verbose_name='AQI')
+    rank = models.CharField(default='一级（优）', max_length=30, verbose_name='等级')
+    PM25 = models.IntegerField(default=0, verbose_name='PM2.5')
 
     class Meta:
         verbose_name = '数据'

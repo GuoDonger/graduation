@@ -14,6 +14,7 @@ cursor = connect.cursor()
 cursor.execute(sql_select, [])
 cities = cursor.fetchall()
 cursor.execute(sql_truncate, [])
+
 for city in cities:
     try:
         url = base_url + str(city[3])
@@ -25,13 +26,17 @@ for city in cities:
         day_time = time.mktime(time.strptime(day_time, "%Y-%m-%d %H:%M:%S"))
         day_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(day_time))
         data = str(soup.select('div .table > table')[0])
-        AQI = tree.xpath('//div[@class="span1"]/div[@class="value"]/text()')[0]
+        AQI = tree.xpath('//div[@class="value"]/text()')[0]
         AQI = int(AQI.strip())
+        rank = tree.xpath('//div[@class="level"]/h4/text()')[0]
+        rank = rank.strip()
+        PM25 = tree.xpath('//div[@class="value"]/text()')[1]
+        PM25 = int(PM25.strip())
     except Exception as error:
         print(error)
         continue
-    sql = "insert into data_data(city_id,time,data,AQI) values(%s,%s,%s,%s);"
-    cursor.execute(sql, [city[0], day_time, data, AQI])
+    sql = "insert into data_data(city_id,time,data,AQI,rank,PM25) values(%s,%s,%s,%s,%s,%s);"
+    cursor.execute(sql, [city[0], day_time, data, AQI, rank, PM25])
     connect.commit()
     print('success')
 connect.close()
