@@ -11,15 +11,13 @@
     <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"/>
 </head>
 <body>
-<div id="headertop">
-				<a href="{% url 'index' %}" class="replace" id="logo"><span></span></a>
+<div id="headertop"><a href="{% url 'other:index' %}" class="replace" id="logo"><span></span></a>
 <section>
-
     <div class="c-box bg-box">
         <div class="login-box clearfix">
             <div class="clearfix">
-                <a class="index-logo" href="{% url 'index' %}"></a>
-                <a class="index-font" href="{% url 'index' %}">回到首页</a>
+                <a class="index-logo" href="{% url 'other:index' %}"></a>
+                <a class="index-font" href="{% url 'other:index' %}">回到首页</a>
             </div>
             <div class="fl slide">
                 <div class="imgslide">

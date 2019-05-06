@@ -30,7 +30,7 @@ def user_register(request):
                 user_profile.is_active = 0
                 user_profile.save()
                 send_email(email, 'register')
-                return HttpResponse('注册成功，去激活吧！ <a href="http://127.0.0.1:8000">回到首页</a>')
+                return HttpResponse('注册成功，去激活吧！ <a href="http://123.56.23.97">回到首页</a>')
         else:
             return render(request, 'register.html', {'user_register_form': user})
 
@@ -112,10 +112,10 @@ def send_email(email, send_type):
     email_verify.save()
     if send_type == 'register':
         subject = '欢迎注册中国雾霾网'
-        content = 'http://127.0.0.1:8000/user/active/' + code
+        content = 'http://123.56.23.97/user/active/' + code
         send_mail(subject, content, EMAIL_HOST_USER, [email, ], html_message=content)
     if send_type == 'update':
         subject = '正在修改密码'
-        content = 'http://127.0.0.1:8000/user/password_reset/' + code
+        content = 'http://123.56.23.97/user/password_reset/' + code
         send_mail(subject, content, EMAIL_HOST_USER, [email, ], html_message=content)
 

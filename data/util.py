@@ -1,8 +1,18 @@
 from urllib import request
 from lxml import etree
-from data.content import HOST, PORT, USER, PASSWORD, CHARSET, DATABASE, HEADERS
 import pymysql
 
+HOST = '123.56.23.97'
+PORT = 3306
+USER = 'root'
+PASSWORD = '111111'
+CHARSET = 'utf8'
+DATABASE = 'wumai'
+
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
+    AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36',
+}
 connect = pymysql.connect(host=HOST, port=PORT, user=USER, password=PASSWORD, database=DATABASE, charset=CHARSET)
 cursor = connect.cursor()
 
@@ -22,13 +32,3 @@ for ul in uls:
         result = cursor.execute(sql, [initial, city[0], city[1]])
         connect.commit()
         print('success')
-
-
-
-
-
-
-
-
-
-

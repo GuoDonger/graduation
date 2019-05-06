@@ -45,6 +45,6 @@ def data_search(request):
         if data:
             return redirect(reverse('data:data_detail', kwargs={'city_id': city_id}))
         else:
-            HttpResponse('暂时无该城市的数据<a href="http://127.0.0.1:8000/data/">返回</a>')
+            HttpResponse('暂时无该城市的数据<a href="http://123.56.23.97/data/">返回</a>')
     else:
-        return HttpResponse('没有该城市<a href="http://127.0.0.1:8000/data/">返回</a>')
+        return HttpResponse('没有该城市<a href="http://123.56.23.97/data/">返回</a>')

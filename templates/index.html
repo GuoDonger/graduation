@@ -16,7 +16,7 @@
 	<div id="wrapper">
 		<div id="header">
 			<div id="headertop">
-				<a href="{% url 'index' %}" class="replace" id="logo"><span></span></a>
+				<a href="{% url 'other:index' %}" class="replace" id="logo"><span></span></a>
 				<div id="loginarea">
                 {% if request.user.is_authenticated %}
                     <p class="notlogin">欢迎您！</p>
@@ -37,12 +37,12 @@
 			</div>
 			<div id="placemainmenu">
 				<ul id="mainmenu">
-					<li class="active"><a href="{% url 'index' %}">网站首页</a></li>
-                    <li><a href="{% url 'harm' %}">雾霾危害</a></li>
-                    <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+					<li class="active"><a href="{% url 'other:index' %}">网站首页</a></li>
+                    <li><a href="{% url 'other:harm' %}">雾霾危害</a></li>
+                    <li><a href="{% url 'other:governance' %}">雾霾治理</a></li>
                     <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
                     <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
-                    <li><a href="{% url 'about' %}">关于我们</a></li>
+                    <li><a href="{% url 'other:about' %}">关于我们</a></li>
 				</ul>
 				<div class="clear"></div>
 			</div>
@@ -97,7 +97,7 @@
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;雾霾的主要成分是PM2.5,也就是指存在于空气中的细小颗粒物质。由于PM2.5的成分直径小于2.5微米，因此可以长时间在空气中悬浮而不会沉降，同时，悬浮在空气中的PM2.5成分很少受到空气流动的影响，当空气中大量存在这种颗粒性物质时,其可见度就会有明显的增加,最终成为雾箱天气。自然环境中存在的PM2.5成分较少，但是随着人类活动的不断增加,以及现代化工业的不断发展和扩展第霾的组成成分-颗粒性悬浮物不断增多,也就逐渐的形成了雾霾。</p>
 							</li>
 						</ul>
-{#                        <img src="{% static 'images/come.jpg' %}" alt="" style="width: 100%">#}
+                      <img src="{% static 'images/index.jpg' %}" alt="" style="width: 100%">
                     </div>
 					<div class="boxbigcontentbottom"></div>
 				</div>
@@ -133,12 +133,12 @@
 		<div id="footer">
 			<p id="texttwitter"></p>
 			<ul id="menufooter">
-				<li class="active"><a href="{% url 'index' %}">网站首页</a></li>
-                <li><a href="{% url 'harm' %}">雾霾危害</a></li>
-                <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+				<li class="active"><a href="{% url 'other:index' %}">网站首页</a></li>
+                <li><a href="{% url 'other:harm' %}">雾霾危害</a></li>
+                <li><a href="{% url 'other:governance' %}">雾霾治理</a></li>
                 <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
                 <li><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
-                <li><a href="{% url 'about' %}">关于我们</a></li>
+                <li><a href="{% url 'other:about' %}">关于我们</a></li>
 			</ul>
 			<ul id="menufooterright">
 				<li>Copyright 2019, 张国栋, Inc.</li>

@@ -9,9 +9,8 @@ https://docs.djangoproject.com/en/2.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
-
+from __future__ import absolute_import
 import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,12 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't**+!9d$i%rj2+ke8^r02#x!+7d$utl^@2c_hm6$w#&&gvr53a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -35,7 +33,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'djcelery',
     'user',
     'news',
     'other',
@@ -68,7 +65,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 图片如果出不来添加下面这句话
                 'django.template.context_processors.media',
             ],
         },
@@ -120,7 +116,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
@@ -128,9 +124,9 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 # 开发时
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # 上线时
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
@@ -145,6 +141,3 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 handler404 = 'user.views.handler_404'
 handler500 = 'user.views.handler_500'
 
-BROKER_URL = 'amqp://guodong:123456@123.56.23.97:5672/vhost1'
-BROKER_TRANSPORT = 'amqp'
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'

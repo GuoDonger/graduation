@@ -5,7 +5,7 @@
       <paths name="wumai">
         <serverdata>
           <mappings>
-            <mapping deploy="/wumai" local="F:/MyCode/wumai" web="/" />
+            <mapping deploy="/wumai" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

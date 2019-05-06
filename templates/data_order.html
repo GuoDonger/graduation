@@ -14,7 +14,7 @@
 	<div id="wrapper">
 		<div id="header">
 			<div id="headertop">
-				<a href="{% url 'index' %}" class="replace" id="logo"><span></span></a>
+				<a href="{% url 'other:index' %}" class="replace" id="logo"><span></span></a>
 				<div id="loginarea">
                 {% if request.user.is_authenticated %}
                     <p class="notlogin">欢迎您！</p>
@@ -35,12 +35,12 @@
 			</div>
 			<div id="placemainmenu">
 				<ul id="mainmenu">
-					<li><a href="{% url 'index' %}">网站首页</a></li>
-                    <li><a href="{% url 'harm' %}">雾霾危害</a></li>
-                    <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+					<li><a href="{% url 'other:index' %}">网站首页</a></li>
+                    <li><a href="{% url 'other:harm' %}">雾霾危害</a></li>
+                    <li><a href="{% url 'other:governance' %}">雾霾治理</a></li>
                     <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
                     <li class="active"><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
-                    <li><a href="{% url 'about' %}">关于我们</a></li>
+                    <li><a href="{% url 'other:about' %}">关于我们</a></li>
 				</ul>
                 <form method="post" action="{% url 'data:data_search' %}" id="frmsearch">{% csrf_token %}
 					<div>
@@ -53,7 +53,7 @@
 		</div>
 		<div id="content">
             <ul id="breadcrumb">
-				<li><a href="{% url 'index' %}">首页</a></li>
+				<li><a href="{% url 'other:index' %}">首页</a></li>
                 <li><a href="{% url 'data:data_list' %}">查询</a></li>
 				<li class="last">排行榜</li>
 			</ul>
@@ -130,12 +130,12 @@
 		<div id="footer">
 			<p id="texttwitter"></p>
 			<ul id="menufooter">
-				<li><a href="{% url 'index' %}">网站首页</a></li>
-                <li><a href="{% url 'harm' %}">雾霾危害</a></li>
-                <li><a href="{% url 'governance' %}">雾霾治理</a></li>
+				<li><a href="{% url 'other:index' %}">网站首页</a></li>
+                <li><a href="{% url 'other:harm' %}">雾霾危害</a></li>
+                <li><a href="{% url 'other:governance' %}">雾霾治理</a></li>
                 <li><a href="{% url 'news:news_list' %}">最新新闻</a></li>
                 <li class="active"><a href="{% url 'data:data_list' %}">雾霾数据</a></li>
-                <li><a href="{% url 'about' %}">关于我们</a></li>
+                <li><a href="{% url 'other:about' %}">关于我们</a></li>
 			</ul>
 			<ul id="menufooterright">
 				<li>Copyright 2019, 张国栋, Inc.</li>
